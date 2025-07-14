@@ -139,32 +139,21 @@
             color: var(--text-color);
         }
         
+        /* --- UPDATED CTA SECTION STYLES --- */
         .cta-section {
-            background-color: var(--card-color);
+            background: linear-gradient(45deg, rgba(102, 7, 8, 0.7), rgba(22, 26, 29, 0.7));
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             padding: 30px;
             border-radius: 12px;
             position: relative;
             z-index: 1;
             overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .cta-section::before {
-            content: '';
-            position: absolute;
-            top: -2px; left: -2px;
-            width: calc(100% + 4px);
-            height: calc(100% + 4px);
-            background: linear-gradient(90deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-            background-size: 400%;
-            z-index: -1;
-            animation: spin 5s linear infinite;
-            border-radius: 12px;
-        }
-
-        @keyframes spin {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            content: none;
         }
 
         .cta-section h2 {
@@ -177,12 +166,6 @@
             color: #b0b0b0;
             margin-bottom: 25px;
             font-size: 1.1rem;
-        }
-
-        .cta-section p a {
-            color: #00BFFF;
-            text-decoration: none;
-            font-weight: bold;
         }
 
         .command {
@@ -279,7 +262,7 @@
         }
         .modal-link {
             display: inline-block;
-            background-color: #00BFFF;
+            background-color: #E5383B;
             color: #fff;
             padding: 12px 25px;
             border-radius: 8px;
@@ -288,7 +271,7 @@
             transition: background-color 0.3s ease;
         }
         .modal-link:hover {
-            background-color: #009acd;
+            background-color: #BA181B;
         }
         
         .footer {
@@ -333,13 +316,15 @@
                     </div>
                     <div class="info-card">
                         <h2>Prize Pool</h2>
-                        <p class="data">WILL BE ADDED SOON</p>
+                        <!-- CHANGE 3: PRIZE POOL UPDATED -->
+                        <p class="data">1QNT power</p>
                     </div>
                 </div>
 
                 <section class="cta-section">
                     <h2>Ready to Compete?</h2>
-                    <p>Go to our Discord server's <a href="https://discord.com/channels/1210667072212828260/1210832243795173396" target="_blank" rel="noopener noreferrer"><strong>#bot-commands</strong></a> channel and type the command:</p>
+                    <!-- CHANGE 1: DISCORD SERVER LINK UPDATED -->
+                    <p>Go to our <a href="https://discord.gg/nH2xpm875Z" target="_blank" rel="noopener noreferrer" style="color: #9370DB; font-weight: bold; text-decoration: none;">Discord server</a>, find the <strong>#bot-commands</strong> channel, and type the command:</p>
                     <div class="command">/participate</div>
                 </section>
 
@@ -357,7 +342,8 @@
             </main>
 
             <footer class="footer">
-                <p>© 2025 Talent VII. Any rights reserved?</p>
+                <!-- CHANGE 2: COPYRIGHT TEXT UPDATED -->
+                <p>© 2025, Talent VII. Any rights reserved?</p>
             </footer>
         </div>
     </div>
