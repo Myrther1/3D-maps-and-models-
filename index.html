@@ -21,15 +21,30 @@
             box-sizing: border-box;
         }
 
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        #content-wrapper {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
             overflow-x: hidden;
         }
 
@@ -45,12 +60,11 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- NEW: FIRE TEXT EFFECT FOR H1 --- */
         .header h1 {
             font-size: 3rem;
             font-weight: 700;
             margin-bottom: 20px;
-            color: #ff4500; /* Base fire color */
+            color: #ff4500;
             animation: fire-flicker 3s ease-in-out infinite alternate;
         }
 
@@ -59,8 +73,6 @@
             50% { text-shadow: 0 0 15px #ff8c00, 0 0 25px #ff8c00, 0 0 35px #ff4500, 0 0 45px #ff4500, 0 0 55px #ff0000; }
             100% { text-shadow: 0 0 10px #ff8c00, 0 0 20px #ff8c00, 0 0 30px #ff4500, 0 0 45px #ff4500; }
         }
-        /* --- END FIRE TEXT --- */
-
 
         .header p {
             font-size: 1.25rem;
@@ -69,7 +81,6 @@
             line-height: 1.6;
         }
         
-        /* --- NEW: RGB EFFECT FOR SUBTITLE SPAN --- */
         .rgb-subtitle {
             font-weight: bold;
             background: linear-gradient(90deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
@@ -85,8 +96,6 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-        /* --- END RGB SUBTITLE --- */
-
 
         .info-grid {
             display: grid;
@@ -123,14 +132,13 @@
             color: var(--text-color);
         }
         
-        /* --- NEW: RGB BORDER FOR CTA SECTION --- */
         .cta-section {
             background-color: var(--card-color);
             padding: 30px;
             border-radius: 12px;
-            position: relative; /* Needed for the pseudo-element */
+            position: relative;
             z-index: 1;
-            overflow: hidden; /* Keeps the glowing border neat */
+            overflow: hidden;
         }
         
         .cta-section::before {
@@ -151,8 +159,6 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-        /* --- END RGB BORDER --- */
-
 
         .cta-section h2 {
             font-size: 1.8rem;
@@ -185,62 +191,114 @@
         }
 
         @media (max-width: 600px) {
-            .header h1 {
-                font-size: 2.5rem;
-            }
-            .header p {
-                font-size: 1.1rem;
-            }
-            .info-card .data {
-                font-size: 1.3rem;
-            }
-            .cta-section h2 {
-                font-size: 1.5rem;
-            }
+            .header h1 { font-size: 2.5rem; }
+            .header p { font-size: 1.1rem; }
+            .info-card .data { font-size: 1.3rem; }
+            .cta-section h2 { font-size: 1.5rem; }
         }
 
     </style>
 </head>
 <body>
 
-    <div class="container">
-        
-        <header class="header">    
-		
-            <h1>THE DEVIL'S PURGATORY</h1>
-			
-            <p>Welcome to the devil's paradise... or should I say Devil's hell? Either way, <br>
-            <span class="rgb-subtitle">Fight the devils to become the Ultimate devil of Swordmasters IO. Join the tournament and prove your worth.</span></p>
-        </header>
-        
-        <main>
-            <div class="info-grid">
-                <div class="info-card">
-                    <h2>Game</h2>
-                    <p class="data">Swordmasters.io</p>
-                </div>
-                <div class="info-card">
-                    <h2>Mode</h2>
-                    <p class="data">1v1 PvP</p>
-                </div>
-                <div class="info-card">
-                    <h2>Prize Pool</h2>
-                    <p class="data">WILL BE ADDED SOON</p>
-                </div>
-            </div>
+    <canvas id="bg-canvas"></canvas>
 
-            <section class="cta-section">
-                <h2>Ready to Compete?</h2>
-                <p>Go to our Discord server's <strong>#bot-commands</strong> channel and type the command:</p>
-                <div class="command">/participate</div>
-            </section>
-        </main>
+    <div id="content-wrapper">
+        <div class="container">
+            <header class="header">    
+                <h1>THE DEVIL'S PURGATORY</h1>
+                <p>Welcome to the devil's paradise... or should I say Devil's hell? Either way, <br>
+                <span class="rgb-subtitle">Fight the devils to become the Ultimate devil of Swordmasters IO. Join the tournament and prove your worth.</span></p>
+            </header>
+            
+            <main>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h2>Game</h2>
+                        <p class="data">Swordmasters.io</p>
+                    </div>
+                    <div class="info-card">
+                        <h2>Mode</h2>
+                        <p class="data">1v1 PvP</p>
+                    </div>
+                    <div class="info-card">
+                        <h2>Prize Pool</h2>
+                        <p class="data">WILL BE ADDED SOON</p>
+                    </div>
+                </div>
 
-        <footer class="footer">
-            <p>&copy; 2024 Tournament Organizers. All rights reserved.</p>
-        </footer>
+                <section class="cta-section">
+                    <h2>Ready to Compete?</h2>
+                    <p>Go to our Discord server's <strong>#bot-commands</strong> channel and type the command:</p>
+                    <div class="command">/participate</div>
+                </section>
+            </main>
 
+            <footer class="footer">
+                <p>&copy; 2024 Tournament Organizers. All rights reserved.</p>
+            </footer>
+        </div>
     </div>
 
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.164.1/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.164.1/examples/jsm/"
+            }
+        }
+    </script>
+    <script type="module">
+        import * as THREE from 'three';
+        import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
+        camera.position.y = 50;
+
+        const renderer = new THREE.WebGLRenderer({
+            canvas: document.querySelector('#bg-canvas'),
+            antialias: true,
+            alpha: true 
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        directionalLight.position.set(5, 5, 5);
+        scene.add(directionalLight);
+
+        const loader = new GLTFLoader();
+        const modelUrl = './world.glb';
+        let model; 
+
+        loader.load(modelUrl, (gltf) => {
+            model = gltf.scene;
+            scene.add(model);
+        }, undefined, (error) => {
+            console.error('An error happened while loading the model:', error);
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            if (model) {
+                model.rotation.y += 0.002;
+            }
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
 </body>
 </html>
