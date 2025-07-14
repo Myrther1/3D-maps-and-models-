@@ -10,7 +10,7 @@
     <style>
         :root {
             --bg-color: #121212;
-            /*--card-color is no longer a solid color */
+            --card-color: rgba(30, 30, 30, 0.65);
             --text-color: #e0e0e0;
             --secondary-glow: rgba(0, 191, 255, 0.6);
         }
@@ -104,15 +104,13 @@
             margin-bottom: 40px;
         }
 
-        /* --- CHANGE 1: INFO CARDS ARE NOW TRANSPARENT --- */
         .info-card {
-            /* Using rgba for color with an alpha (transparency) channel */
-            background-color: rgba(30, 30, 30, 0.65); 
+            background-color: var(--card-color);
             padding: 25px;
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            backdrop-filter: blur(5px); /* Adds a nice frosted glass effect */
+            backdrop-filter: blur(5px);
         }
 
         .info-card:hover {
@@ -136,7 +134,7 @@
         }
         
         .cta-section {
-            background-color: rgba(30, 30, 30, 0.65);
+            background-color: var(--card-color);
             padding: 30px;
             border-radius: 12px;
             position: relative;
@@ -176,9 +174,8 @@
             font-size: 1.1rem;
         }
         
-        /* --- NEW STYLE FOR THE CLICKABLE LINK --- */
         .cta-section p a {
-            color: #00BFFF; /* Bright blue to stand out */
+            color: #00BFFF;
             text-decoration: none;
             font-weight: bold;
             transition: text-decoration 0.2s ease-in-out;
@@ -244,7 +241,6 @@
 
                 <section class="cta-section">
                     <h2>Ready to Compete?</h2>
-                    <!-- --- CHANGE 2: THE LINK IS NOW CLICKABLE --- -->
                     <p>Go to our Discord server's <a href="https://discord.com/channels/1210667072212828260/1210832243795173396" target="_blank" rel="noopener noreferrer">#bot-commands</a> channel and type the command:</p>
                     <div class="command">/participate</div>
                 </section>
@@ -296,6 +292,10 @@
         loader.load(modelUrl, (gltf) => {
             model = gltf.scene;
             scene.add(model);
+            
+            // --- THE FIX: START ANIMATING ONLY AFTER THE MODEL IS LOADED ---
+            animate(); 
+            
         }, undefined, (error) => {
             console.error('An error happened while loading the model:', error);
         });
@@ -304,7 +304,8 @@
             requestAnimationFrame(animate);
             renderer.render(scene, camera);
         }
-        animate();
+        
+        // We no longer call animate() here. It is now called inside the loader.
 
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
