@@ -10,7 +10,7 @@
     <style>
         :root {
             --bg-color: #121212;
-            --card-color: #1e1e1e;
+            /*--card-color is no longer a solid color */
             --text-color: #e0e0e0;
             --secondary-glow: rgba(0, 191, 255, 0.6);
         }
@@ -104,12 +104,15 @@
             margin-bottom: 40px;
         }
 
+        /* --- CHANGE 1: INFO CARDS ARE NOW TRANSPARENT --- */
         .info-card {
-            background-color: var(--card-color);
+            /* Using rgba for color with an alpha (transparency) channel */
+            background-color: rgba(30, 30, 30, 0.65); 
             padding: 25px;
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(5px); /* Adds a nice frosted glass effect */
         }
 
         .info-card:hover {
@@ -133,12 +136,13 @@
         }
         
         .cta-section {
-            background-color: var(--card-color);
+            background-color: rgba(30, 30, 30, 0.65);
             padding: 30px;
             border-radius: 12px;
             position: relative;
             z-index: 1;
             overflow: hidden;
+            backdrop-filter: blur(5px);
         }
         
         .cta-section::before {
@@ -170,6 +174,17 @@
             color: #b0b0b0;
             margin-bottom: 25px;
             font-size: 1.1rem;
+        }
+        
+        /* --- NEW STYLE FOR THE CLICKABLE LINK --- */
+        .cta-section p a {
+            color: #00BFFF; /* Bright blue to stand out */
+            text-decoration: none;
+            font-weight: bold;
+            transition: text-decoration 0.2s ease-in-out;
+        }
+        .cta-section p a:hover {
+            text-decoration: underline;
         }
 
         .command {
@@ -229,13 +244,14 @@
 
                 <section class="cta-section">
                     <h2>Ready to Compete?</h2>
-                    <p>Go to our Discord server's <strong>#bot-commands</strong> channel and type the command:</p>
+                    <!-- --- CHANGE 2: THE LINK IS NOW CLICKABLE --- -->
+                    <p>Go to our Discord server's <a href="https://discord.com/channels/1210667072212828260/1210832243795173396" target="_blank" rel="noopener noreferrer">#bot-commands</a> channel and type the command:</p>
                     <div class="command">/participate</div>
                 </section>
             </main>
 
             <footer class="footer">
-                <p>&copy; 2025 Talent VII. Any rights reserved?</p>
+                <p>© 2024 Tournament Organizers. All rights reserved.</p>
             </footer>
         </div>
     </div>
@@ -254,8 +270,9 @@
 
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 5;
-        camera.position.y = 50;
+        
+        camera.position.set(0, 5, 2.5); 
+        camera.lookAt(0, 0, 0);
 
         const renderer = new THREE.WebGLRenderer({
             canvas: document.querySelector('#bg-canvas'),
@@ -285,11 +302,6 @@
 
         function animate() {
             requestAnimationFrame(animate);
-
-            if (model) {
-                model.rotation.y += 0.002;
-            }
-
             renderer.render(scene, camera);
         }
         animate();
