@@ -10,7 +10,7 @@
     <style>
         :root {
             --bg-color: #121212;
-            --card-color: #1e1e1e; /* Opaque card color */
+            --card-color: #1e1e1e;
             --text-color: #e0e0e0;
             --secondary-glow: rgba(0, 191, 255, 0.6);
         }
@@ -60,19 +60,31 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .header h1 {
-            font-size: 3rem;
-            font-weight: 700;
+        /* --- STYLES FOR THE NEW HEADER IMAGE --- */
+        #header-title-image {
+            width: 100%;
+            max-width: 650px; /* Adjust size as needed */
+            height: auto;
             margin-bottom: 20px;
-            color: #ff4500;
-            animation: fire-flicker 3s ease-in-out infinite alternate;
+            /* This blend mode makes the black background of the image disappear */
+            mix-blend-mode: screen; 
+            /* This animation uses drop-shadow filters to create the fire effect on the image */
+            animation: image-fire-flicker 3s ease-in-out infinite alternate;
         }
 
-        @keyframes fire-flicker {
-            0% { text-shadow: 0 0 10px #ff8c00, 0 0 20px #ff8c00, 0 0 30px #ff4500, 0 0 40px #ff4500; }
-            50% { text-shadow: 0 0 15px #ff8c00, 0 0 25px #ff8c00, 0 0 35px #ff4500, 0 0 45px #ff4500, 0 0 55px #ff0000; }
-            100% { text-shadow: 0 0 10px #ff8c00, 0 0 20px #ff8c00, 0 0 30px #ff4500, 0 0 45px #ff4500; }
+        @keyframes image-fire-flicker {
+            0% {
+                filter: drop-shadow(0 0 8px #ff8c00) drop-shadow(0 0 15px #ff4500);
+            }
+            50% {
+                filter: drop-shadow(0 0 12px #ff8c00) drop-shadow(0 0 20px #ff4500) drop-shadow(0 0 30px #ff0000);
+            }
+            100% {
+                filter: drop-shadow(0 0 8px #ff8c00) drop-shadow(0 0 18px #ff4500);
+            }
         }
+        /* --- END NEW STYLES --- */
+
 
         .header p {
             font-size: 1.25rem;
@@ -189,104 +201,6 @@
             display: inline-block;
             user-select: all;
         }
-
-        /* --- NEW LOGBOOK STYLES --- */
-        .logbook-section {
-            margin-top: 25px;
-            background-color: var(--card-color); /* Opaque background */
-            border-radius: 12px;
-            padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .log-entry {
-            margin-bottom: 15px;
-        }
-        .log-entry:last-child {
-            margin-bottom: 0;
-        }
-        .log-entry h3 {
-            font-size: 1rem;
-            color: #a0a0a0;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
-        .log-item {
-            background-color: var(--bg-color);
-            padding: 15px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-        .log-item.active {
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .log-item.active:hover {
-            background-color: #2a2a2a;
-        }
-        .log-item.disabled {
-            color: #666;
-            cursor: not-allowed;
-        }
-        /* --- END LOGBOOK STYLES --- */
-
-        /* --- NEW MODAL (SCROLL) STYLES --- */
-        .modal-overlay {
-            display: none; /* Hidden by default */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 100;
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content {
-            background-color: var(--card-color);
-            padding: 30px;
-            border-radius: 12px;
-            max-width: 500px;
-            width: 90%;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            position: relative;
-            text-align: center;
-        }
-        .close-button {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 2rem;
-            color: #aaa;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-        .close-button:hover {
-            color: #fff;
-        }
-        .poem {
-            font-style: italic;
-            color: #b0b0b0;
-            margin-bottom: 25px;
-            line-height: 1.8;
-            font-size: 1.1rem;
-        }
-        .modal-link {
-            display: inline-block;
-            background-color: #00BFFF;
-            color: #fff;
-            padding: 12px 25px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-        .modal-link:hover {
-            background-color: #009acd;
-        }
-        /* --- END MODAL STYLES --- */
         
         .footer {
             margin-top: 40px;
@@ -310,7 +224,11 @@
     <div id="content-wrapper">
         <div class="container">
             <header class="header">    
-                <h1>THE DEVIL'S PURGATORY</h1>
+                <!-- The h1 text is now replaced with this image -->
+                <img id="header-title-image" 
+                     src="https://see.fontimg.com/api/rf5/BWqOd/MWU2NGEyZmEyNjUzNDdkYWFiNGE1ZGMxZGFjYzI4MzAub3Rm/VGhlIERldmlsJ3MgSGVsbA/robus.png?r=fs&h=81&w=1250&fg=FFFFFF&bg=000000&tb=1&s=65" 
+                     alt="The Devil's Hell">
+
                 <p>Welcome to the devil's paradise... or should I say Devil's hell? Either way, <br>
                 <span class="rgb-subtitle">Fight the devils to become the Ultimate devil of Swordmasters IO. Join the tournament and prove your worth.</span></p>
             </header>
@@ -336,43 +254,13 @@
                     <p>Go to our Discord server's <a href="https://discord.com/channels/1210667072212828260/1210832243795173396" target="_blank" rel="noopener noreferrer"><strong>#bot-commands</strong></a> channel and type the command:</p>
                     <div class="command">/participate</div>
                 </section>
-
-                <!-- NEW LOGBOOK HTML -->
-                <section class="logbook-section">
-                    <div class="log-entry">
-                        <h3>Active Tournament</h3>
-                        <div class="log-item active" id="activeTournamentLog">The Devil's Purgatory</div>
-                    </div>
-                    <div class="log-entry">
-                        <h3>Past Tournaments</h3>
-                        <div class="log-item disabled">NOTHING TO SHOW HERE</div>
-                    </div>
-                </section>
-                <!-- END LOGBOOK HTML -->
-
             </main>
 
             <footer class="footer">
-                <p>© 2025 Talent VII. Any rights reserved?</p>
+                <p>© 2024 Tournament Organizers. All rights reserved.</p>
             </footer>
         </div>
     </div>
-
-    <!-- NEW MODAL (SCROLL) HTML -->
-    <div class="modal-overlay" id="scrollModal">
-        <div class="modal-content">
-            <span class="close-button" id="closeModalButton">×</span>
-            <p class="poem">
-                Through fire and ash, your trial awaits,<br>
-                Where steel rings true and opens gates.<br>
-                Let courage guide the sword you wield,<br>
-                And on this day, refuse to yield.
-            </p>
-            <a href="https://discord.com/channels/1210667072212828260/1210832243795173396" target="_blank" rel="noopener noreferrer" class="modal-link">Go to #bot-commands</a>
-        </div>
-    </div>
-    <!-- END MODAL HTML -->
-
 
     <script type="importmap">
         {
@@ -433,27 +321,6 @@
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
-        
-        // --- NEW JAVASCRIPT FOR LOGBOOK MODAL ---
-        const activeLog = document.getElementById('activeTournamentLog');
-        const modal = document.getElementById('scrollModal');
-        const closeModalButton = document.getElementById('closeModalButton');
-
-        activeLog.addEventListener('click', () => {
-            modal.style.display = 'flex';
-        });
-
-        closeModalButton.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-
-        // Close modal if user clicks on the overlay background
-        modal.addEventListener('click', (event) => {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-        // --- END NEW JAVASCRIPT ---
     </script>
 </body>
 </html>
